@@ -1,94 +1,125 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowDown } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none" />
-      
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Name prominently displayed */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight">
-            CLAIRE LINDSTROM
-          </h1>
-          
-          <p className="text-lg sm:text-xl md:text-2xl text-foreground/70 mb-8 font-medium">
-            AI Software Engineer | Real-Time Voice AI | Applied LLM Systems
-          </p>
-        </motion.div>
+    <>
+      <section className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Subtle radial background gradient */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-radial-gradient from-foreground/3 via-transparent to-transparent" 
+               style={{
+                 background: 'radial-gradient(circle at 30% 50%, rgba(229, 229, 229, 0.03) 0%, transparent 50%)'
+               }} />
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            <span className="block">I architect and deploy production-grade AI systems</span>
-            <span className="block text-accent">that operate in real-time, distributed environments.</span>
-          </h2>
-        </motion.div>
+        {/* Faint grid overlay */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.02]"
+             style={{
+               backgroundImage: `
+                 linear-gradient(rgba(229, 229, 229, 0.1) 1px, transparent 1px),
+                 linear-gradient(90deg, rgba(229, 229, 229, 0.1) 1px, transparent 1px)
+               `,
+               backgroundSize: '48px 48px'
+             }} />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-lg sm:text-xl text-foreground/70 mb-12 max-w-3xl mx-auto leading-relaxed"
-        >
-          Specializing in LLM orchestration, semantic retrieval pipelines, and low-latency voice AI infrastructure powering real-world automation systems.
-        </motion.p>
+        <div className="max-w-7xl mx-auto w-full relative z-10 pt-[120px] pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* Left Column - Main Content */}
+            <div className="lg:col-span-7 space-y-12">
+              {/* Top Identity Line */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="space-y-2"
+              >
+                <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground">
+                  Claire Lindstrom
+                </h1>
+                <p className="text-sm text-foreground/80 font-medium tracking-wide uppercase">
+                  AI Software Engineer — Real-Time & Applied LLM Systems
+                </p>
+                <p className="text-xs text-foreground/70 font-mono">
+                  Frederick, MD · U.S. Citizen · Clearance Eligible
+                </p>
+              </motion.div>
 
-        {/* Contact Block */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="bg-foreground/5 border border-foreground/10 rounded-lg p-6 mb-12 max-w-2xl mx-auto"
-        >
-          <div className="space-y-2 text-sm font-mono text-foreground/80">
-            <p>Frederick, MD</p>
-            <p>U.S. Citizen | Eligible for Security Clearance</p>
-            <p>
-              <a href="mailto:clairelindstrom7@gmail.com" className="hover:text-accent transition-colors">
-                clairelindstrom7@gmail.com
-              </a>
-            </p>
-            <p>
-              <a href="https://www.linkedin.com/in/clairelindstrom/" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                https://www.linkedin.com/in/clairelindstrom/
-              </a>
-            </p>
-            <p>
-              <a href="https://github.com/clairelindstrom92" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                https://github.com/clairelindstrom92
-              </a>
-            </p>
+              {/* Main Headline */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                className="space-y-6"
+              >
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-normal leading-[1.1] tracking-tight text-foreground max-w-2xl">
+                  I design and deploy production AI systems
+                  {' '}
+                  <span className="font-medium">for real-time, distributed environments.</span>
+                </h2>
+                
+                {/* Subtle divider line */}
+                <div className="w-24 h-px bg-foreground/20" />
+              </motion.div>
+
+              {/* Subtext */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                className="text-lg sm:text-xl text-foreground/90 leading-relaxed max-w-2xl font-light"
+              >
+                Specializing in LLM orchestration, retrieval pipelines,
+                and low-latency voice AI infrastructure.
+              </motion.p>
+            </div>
+
+            {/* Right Column - System Overview */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="lg:col-span-5"
+            >
+              <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-10 hover:border-foreground/20 transition-all duration-300 shadow-[0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
+                <h3 className="text-sm font-mono text-foreground/60 uppercase tracking-wider mb-8">
+                  Real-Time Voice AI Architecture
+                </h3>
+                <div className="space-y-6">
+                  <div className="font-mono text-xs text-foreground/80 leading-relaxed">
+                    <div className="grid grid-cols-3 gap-2">
+                      <span className="px-3 py-2 bg-foreground/10 rounded border border-foreground/10 text-center">Twilio</span>
+                      <span className="px-3 py-2 bg-foreground/10 rounded border border-foreground/10 text-center">WebSocket</span>
+                      <span className="px-3 py-2 bg-foreground/10 rounded border border-foreground/10 text-center">FastAPI</span>
+                      <span className="px-3 py-2 bg-foreground/10 rounded border border-foreground/10 text-center">OpenAI</span>
+                      <span className="px-3 py-2 bg-foreground/10 rounded border border-foreground/10 text-center">Cache</span>
+                      <span className="px-3 py-2 bg-foreground/10 rounded border border-foreground/10 text-center">AWS</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-1 mt-3">
+                      <ArrowRight className="h-3 w-3 text-foreground/40 rotate-90" />
+                      <ArrowRight className="h-3 w-3 text-foreground/40" />
+                      <ArrowRight className="h-3 w-3 text-foreground/40 rotate-90" />
+                      <ArrowRight className="h-3 w-3 text-foreground/40" />
+                      <ArrowRight className="h-3 w-3 text-foreground/40 rotate-90" />
+                      <ArrowRight className="h-3 w-3 text-foreground/40" />
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-foreground/10">
+                    <p className="text-xs text-foreground/70 font-mono leading-relaxed">
+                      Production system handling bidirectional audio streaming,
+                      context retrieval, and session lifecycle management.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16"
-        >
-          <a
-            href="#about"
-            className="inline-flex flex-col items-center text-foreground/50 hover:text-accent transition-colors"
-          >
-            <span className="text-sm mb-2">Scroll to explore</span>
-            <ArrowDown className="h-5 w-5 animate-bounce" />
-          </a>
-        </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
+      {/* Thin divider below hero */}
+      <div className="h-px bg-foreground/5 mx-auto max-w-7xl" />
+    </>
   )
 }

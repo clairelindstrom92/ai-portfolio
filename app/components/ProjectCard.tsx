@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, ExternalLink } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 interface ProjectCardProps {
   title: string
@@ -21,37 +21,47 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6 }}
     >
       <Link
         href={href}
-        className={`block group relative p-6 rounded-lg border border-foreground/10 hover:border-accent/50 transition-all duration-300 ${
-          featured ? 'bg-gradient-to-br from-accent/5 to-transparent' : 'bg-foreground/5'
+        className={`block group relative p-10 rounded-lg border transition-all duration-300 h-full ${
+          featured 
+            ? 'bg-foreground/5 border-foreground/15 hover:border-accent/40 hover:shadow-xl hover:-translate-y-1' 
+            : 'bg-foreground/5 border-foreground/10 hover:border-foreground/30 hover:shadow-lg hover:-translate-y-1'
         }`}
       >
-        <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-semibold group-hover:text-accent transition-colors">
+        <div className="flex items-start justify-between mb-6">
+          <h3 className={`text-2xl sm:text-3xl font-bold group-hover:text-accent transition-colors ${featured ? 'text-accent' : 'text-foreground'}`}>
             {title}
           </h3>
-          <ArrowRight className="h-5 w-5 text-foreground/40 group-hover:text-accent group-hover:translate-x-1 transition-all" />
         </div>
         
-        <p className="text-foreground/70 mb-4 leading-relaxed">
+        <p className="text-foreground/90 mb-8 leading-relaxed text-base">
           {description}
         </p>
         
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-6">
           {technologies.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 text-xs font-mono bg-foreground/10 rounded border border-foreground/10"
+              className={`px-3 py-1.5 text-xs font-mono rounded border transition-colors ${
+                featured
+                  ? 'bg-accent/10 border-accent/20 text-accent/90'
+                  : 'bg-foreground/10 border-foreground/20 text-foreground/80'
+              }`}
             >
               {tech}
             </span>
           ))}
+        </div>
+
+        <div className="flex items-center gap-2 text-sm font-mono text-foreground/60 group-hover:text-accent transition-colors">
+          <span>View Details</span>
+          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
     </motion.div>

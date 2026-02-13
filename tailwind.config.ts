@@ -17,6 +17,11 @@ const config: Config = {
       fontFamily: {
         mono: ['var(--font-mono)', 'monospace'],
       },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '128': '32rem',
+      },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',
         'slide-up': 'slideUp 0.6s ease-out',

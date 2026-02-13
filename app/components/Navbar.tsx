@@ -7,61 +7,90 @@ import { Menu, X } from 'lucide-react'
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
+      
+      // Detect active section
+      const sections = ['about', 'tech', 'architecture', 'projects', 'contact']
+      const scrollPosition = window.scrollY + 100
+      
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const offsetTop = element.offsetTop
+          const offsetHeight = element.offsetHeight
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
     window.addEventListener('scroll', handleScroll)
+    handleScroll() // Initial check
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const element = document.querySelector(href)
+    if (element) {
+      const offset = 80
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+    setIsMobileMenuOpen(false)
+  }
+
+  const navLinks = [
+    { href: '#about', label: 'About', id: 'about' },
+    { href: '#tech', label: 'Tech Stack', id: 'tech' },
+    { href: '#architecture', label: 'Architecture', id: 'architecture' },
+    { href: '#projects', label: 'Projects', id: 'projects' },
+    { href: '#contact', label: 'Contact', id: 'contact' },
+  ]
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-background/80 backdrop-blur-md border-b border-foreground/10'
-          : 'bg-transparent'
+          : 'bg-background/60 backdrop-blur-md border-b border-foreground/5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-lg font-semibold hover:text-accent transition-colors">
+          <Link href="/" className="text-sm font-medium hover:text-foreground/80 transition-colors tracking-tight">
             Claire Lindstrom
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link
-              href="#about"
-              className="text-sm font-medium hover:text-accent transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="#tech"
-              className="text-sm font-medium hover:text-accent transition-colors"
-            >
-              Tech Stack
-            </Link>
-            <Link
-              href="#architecture"
-              className="text-sm font-medium hover:text-accent transition-colors"
-            >
-              Architecture
-            </Link>
-            <Link
-              href="#projects"
-              className="text-sm font-medium hover:text-accent transition-colors"
-            >
-              Projects
-            </Link>
-            <Link
-              href="#contact"
-              className="text-sm font-medium hover:text-accent transition-colors"
-            >
-              Contact
-            </Link>
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                className={`text-xs font-medium transition-colors tracking-wide uppercase cursor-pointer relative ${
+                  activeSection === link.id
+                    ? 'text-foreground'
+                    : 'text-foreground/80 hover:text-foreground'
+                }`}
+              >
+                {link.label}
+                {activeSection === link.id && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent" />
+                )}
+              </a>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -71,9 +100,9 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             )}
           </button>
         </div>
@@ -81,41 +110,20 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden pb-4 space-y-2">
-            <Link
-              href="#about"
-              className="block py-2 text-sm hover:text-accent transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              href="#tech"
-              className="block py-2 text-sm hover:text-accent transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Tech Stack
-            </Link>
-            <Link
-              href="#architecture"
-              className="block py-2 text-sm hover:text-accent transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Architecture
-            </Link>
-            <Link
-              href="#projects"
-              className="block py-2 text-sm hover:text-accent transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Projects
-            </Link>
-            <Link
-              href="#contact"
-              className="block py-2 text-sm hover:text-accent transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                className={`block py-2 text-xs font-medium transition-colors tracking-wide uppercase cursor-pointer ${
+                  activeSection === link.id
+                    ? 'text-foreground'
+                    : 'text-foreground/80 hover:text-foreground'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         )}
       </div>
