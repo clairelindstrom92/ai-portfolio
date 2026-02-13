@@ -14,7 +14,7 @@ export default function Navbar() {
       setIsScrolled(window.scrollY > 20)
       
       // Detect active section
-      const sections = ['about', 'tech', 'architecture', 'projects', 'contact']
+      const sections = ['about', 'projects', 'skills', 'experience', 'contact']
       const scrollPosition = window.scrollY + 100
       
       for (const section of sections) {
@@ -52,9 +52,9 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '#about', label: 'About', id: 'about' },
-    { href: '#tech', label: 'Tech Stack', id: 'tech' },
-    { href: '#architecture', label: 'Architecture', id: 'architecture' },
     { href: '#projects', label: 'Projects', id: 'projects' },
+    { href: '#skills', label: 'Skills', id: 'skills' },
+    { href: '#experience', label: 'Experience', id: 'experience' },
     { href: '#contact', label: 'Contact', id: 'contact' },
   ]
 

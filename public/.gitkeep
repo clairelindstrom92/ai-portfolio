@@ -1,0 +1,3 @@
+# Public assets directory
+# TODO: Add resume.pdf here when available
+# The resume download link in Hero.tsx points to /resume.pdf

@@ -2,7 +2,7 @@ import Navbar from '../../components/Navbar'
 import Section from '../../components/Section'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Sparkles, ExternalLink, Code } from 'lucide-react'
 
 export default function ManifestAlchemyPage() {
   return (
@@ -19,9 +19,16 @@ export default function ManifestAlchemyPage() {
             Back to Projects
           </Link>
 
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">Manifest Alchemy</h1>
+          <div className="mb-8">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono rounded border bg-purple-500/10 border-purple-500/20 text-purple-400/90">
+              <Sparkles className="h-3 w-3" />
+              Founder Project
+            </span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">Manifest Alchemy AI</h1>
           <p className="text-xl text-foreground/70 mb-8">
-            Full-stack AI reasoning platform with LLM-powered structured prompting and semantic retrieval
+            Agentic planning platform with personalized AI memory and RAG-powered retrieval
           </p>
 
           <div className="flex flex-wrap gap-2 mb-12">
@@ -136,7 +143,7 @@ export default function ManifestAlchemyPage() {
 
             <section>
               <h2 className="text-2xl font-semibold mb-4 font-mono text-accent">Impact</h2>
-              <p className="text-foreground/80 leading-relaxed">
+              <p className="text-foreground/95 leading-relaxed mb-6">
                 Created a production-ready AI reasoning platform that demonstrates advanced
                 capabilities in LLM orchestration, semantic retrieval, and personalized memory
                 systems. The platform showcases full-stack AI engineering skills, from frontend
@@ -144,6 +151,28 @@ export default function ManifestAlchemyPage() {
                 Successfully integrated multiple technologies to create a cohesive, performant
                 AI system.
               </p>
+              <div className="flex items-center gap-4 pt-4 border-t border-foreground/10">
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Live Site
+                  <span className="text-xs text-foreground/50">(Coming soon)</span>
+                </a>
+                <a
+                  href="https://github.com/clairelindstrom92/manifest-alchemy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors"
+                >
+                  <Code className="h-4 w-4" />
+                  Repository
+                  <span className="text-xs text-foreground/50">(TODO: Verify link)</span>
+                </a>
+              </div>
             </section>
           </div>
         </div>
