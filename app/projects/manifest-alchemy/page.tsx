@@ -2,7 +2,7 @@ import Navbar from '../../components/Navbar'
 import Section from '../../components/Section'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
-import { ArrowLeft, Sparkles, ExternalLink, Code } from 'lucide-react'
+import { ArrowLeft, Sparkles, Code } from 'lucide-react'
 
 export default function ManifestAlchemyPage() {
   return (
@@ -153,24 +153,13 @@ export default function ManifestAlchemyPage() {
               </p>
               <div className="flex items-center gap-4 pt-4 border-t border-foreground/10">
                 <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  Live Site
-                  <span className="text-xs text-foreground/50">(Coming soon)</span>
-                </a>
-                <a
-                  href="https://github.com/clairelindstrom92/manifest-alchemy"
+                  href="https://github.com/clairelindstrom92/manifestalchemy.ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors"
                 >
                   <Code className="h-4 w-4" />
                   Repository
-                  <span className="text-xs text-foreground/50">(TODO: Verify link)</span>
                 </a>
               </div>
             </section>

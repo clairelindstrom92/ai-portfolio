@@ -53,21 +53,33 @@ export default function Home() {
       featured: true,
       badge: 'Founder Project',
       links: {
-        live: '#', // TODO: Add live URL
-        repo: 'https://github.com/clairelindstrom92/manifest-alchemy', // TODO: Verify repo exists
+        repo: 'https://github.com/clairelindstrom92/manifestalchemy.ai',
       },
     },
     {
-      title: 'RAG Evaluation & Retrieval Toolkit',
+      title: 'Document Processing AI',
       subtitle: 'Personal Build',
       description:
-        'Comprehensive evaluation framework for RAG systems measuring retrieval quality (precision/recall), latency, groundedness, and response accuracy. Includes dataset harness, regression tests, and deployment tooling.',
-      technologies: ['Python', 'FastAPI', 'Vector Search', 'Evaluation Metrics', 'Testing'],
-      href: '/projects/rag-toolkit',
+        'Production-grade RAG API built with FastAPI. Upload PDFs and plain-text files, then query them in natural language. Features FAISS vector indexing, character-based chunking with word-boundary snapping, SQLite metadata persistence, and an abstracted LLM provider pattern.',
+      technologies: ['Python', 'FastAPI', 'FAISS', 'SQLite', 'RAG', 'LLM Abstraction'],
+      href: '/projects/document-processing',
       featured: false,
-      badge: 'Personal Project (WIP)',
+      badge: 'Personal Project',
       links: {
-        repo: '#', // TODO: Add repo URL when available
+        repo: 'https://github.com/clairelindstrom92/Document-Processing-AI',
+      },
+    },
+    {
+      title: 'Generated Moon',
+      subtitle: 'Luxury AI Design Agency',
+      description:
+        'Full-stack AI-powered design agency platform. Features an intelligent chatbot that conducts a structured assessment (5–8 questions) to auto-generate detailed project briefs, Stripe payments, Resend email integration, and lead capture — all deployable on Railway or Vercel.',
+      technologies: ['React', 'Vite', 'Express', 'Claude AI', 'HuggingFace', 'Stripe', 'Resend'],
+      href: '/projects/ai-design-website',
+      featured: false,
+      badge: 'Founder Project',
+      links: {
+        repo: 'https://github.com/clairelindstrom92/AiDesignWebsite',
       },
     },
   ]
@@ -143,7 +155,7 @@ export default function Home() {
       </Section>
 
       <Section id="projects" title="Projects" subtitle="Production AI systems I've built">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
