@@ -24,6 +24,14 @@ import ProjectCard from './components/ProjectCard'
 import Footer from './components/Footer'
 import Link from 'next/link'
 import { Briefcase, Building2, Code, Calendar, Zap, ArrowRight, ExternalLink } from 'lucide-react'
+import {
+  VoiceAIPreview,
+  ManifestAlchemyPreview,
+  DocumentProcessingPreview,
+  GeneratedMoonPreview,
+  SynergyLivingPreview,
+  SmartSitePreview,
+} from './components/ProjectPreviews'
 
 export default function Home() {
   const projects = [
@@ -36,6 +44,7 @@ export default function Home() {
       href: '/projects/voice-ai',
       featured: true,
       badge: 'Employer Project',
+      preview: <VoiceAIPreview />,
       ownership: [
         'Architected real-time audio streaming pipeline',
         'Implemented session lifecycle and state management',
@@ -53,6 +62,7 @@ export default function Home() {
       href: '/projects/manifest-alchemy',
       featured: true,
       badge: 'Founder Project',
+      preview: <ManifestAlchemyPreview />,
       links: {
         repo: 'https://github.com/clairelindstrom92/manifestalchemy.ai',
       },
@@ -66,6 +76,7 @@ export default function Home() {
       href: '/projects/document-processing',
       featured: false,
       badge: 'Personal Project',
+      preview: <DocumentProcessingPreview />,
       links: {
         repo: 'https://github.com/clairelindstrom92/Document-Processing-AI',
       },
@@ -79,6 +90,7 @@ export default function Home() {
       href: '/projects/ai-design-website',
       featured: false,
       badge: 'Founder Project',
+      preview: <GeneratedMoonPreview />,
       links: {
         repo: 'https://github.com/clairelindstrom92/AiDesignWebsite',
       },
@@ -92,6 +104,7 @@ export default function Home() {
       href: '/projects/synergy-living',
       featured: false,
       badge: 'Founder Project',
+      preview: <SynergyLivingPreview />,
       links: {
         repo: 'https://github.com/clairelindstrom92/synergy-living',
       },
@@ -275,8 +288,12 @@ export default function Home() {
           {prototypes.map((proto) => (
             <div
               key={proto.title}
-              className="bg-foreground/5 border border-foreground/10 rounded-lg p-8 hover:border-accent/30 hover:shadow-xl transition-all duration-300"
+              className="bg-foreground/5 border border-foreground/10 rounded-lg overflow-hidden hover:border-accent/30 hover:shadow-xl transition-all duration-300"
             >
+              <div className="w-full aspect-video bg-foreground/5 border-b border-foreground/10 overflow-hidden relative">
+                <SmartSitePreview />
+              </div>
+              <div className="p-8">
               <div className="flex items-start justify-between mb-4 flex-wrap gap-4">
                 <div>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono rounded border bg-accent/10 border-accent/20 text-accent/90 mb-3">
@@ -330,6 +347,7 @@ export default function Home() {
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
+              </div>{/* end p-8 */}
             </div>
           ))}
         </div>

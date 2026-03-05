@@ -17,6 +17,7 @@ interface ProjectCardProps {
     live?: string
     repo?: string
   }
+  preview?: React.ReactNode
 }
 
 export default function ProjectCard({
@@ -29,6 +30,7 @@ export default function ProjectCard({
   badge,
   ownership,
   links,
+  preview,
 }: ProjectCardProps) {
   const getBadgeIcon = () => {
     if (badge?.includes('Employer')) return <Briefcase className="h-3 w-3" />
@@ -44,11 +46,19 @@ export default function ProjectCard({
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className={`bg-foreground/5 border rounded-lg p-8 h-full flex flex-col transition-all duration-300 ${
-        featured 
-          ? 'border-foreground/15 hover:border-accent/40 hover:shadow-xl hover:-translate-y-1' 
+      <div className={`bg-foreground/5 border rounded-lg overflow-hidden h-full flex flex-col transition-all duration-300 ${
+        featured
+          ? 'border-foreground/15 hover:border-accent/40 hover:shadow-xl hover:-translate-y-1'
           : 'border-foreground/10 hover:border-foreground/30 hover:shadow-lg hover:-translate-y-1'
       }`}>
+        {/* Preview */}
+        {preview && (
+          <div className="w-full aspect-video bg-foreground/5 border-b border-foreground/10 overflow-hidden relative">
+            {preview}
+          </div>
+        )}
+
+        <div className="p-8 flex flex-col flex-1">
         {/* Badge */}
         {badge && (
           <div className="flex items-center gap-2 mb-4">
@@ -149,6 +159,7 @@ export default function ProjectCard({
             )}
           </div>
         </div>
+        </div>{/* end p-8 */}
       </div>
     </motion.div>
   )
