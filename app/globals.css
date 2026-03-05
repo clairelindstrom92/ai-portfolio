@@ -2,54 +2,245 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   Y2K Holographic Tech-Girly — Design System
+   ============================================================ */
+
 :root {
-  --background: #0a0a0a;
-  --foreground: #e5e5e5;
-  --accent: #3b82f6;
-  --accent-dark: #2563eb;
+  --bg: #080810;
+  --pink: #f4a7c3;
+  --lavender: #c9b8f5;
+  --aqua: #7ee8e8;
+  --pearl: #f0eef8;
+  --foreground: #f0eef8;
+  --foreground-muted: rgba(240, 238, 248, 0.55);
+  --foreground-dim: rgba(240, 238, 248, 0.28);
+  --accent: #c9b8f5;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-hover: rgba(255, 255, 255, 0.18);
+  --ease-float: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
   color: var(--foreground);
-  background: linear-gradient(to bottom, #0b0b0f 0%, #0f1116 50%, #0b0b0f 100%);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: var(--bg);
+  font-family: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  position: relative;
+  overflow-x: hidden;
 }
 
-/* Subtle noise texture overlay */
+/* ---- Y2K Grid Lines (2% opacity) ---- */
 body::before {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.02;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(240, 238, 248, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 238, 248, 0.02) 1px, transparent 1px);
+  background-size: 44px 44px;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   z-index: 0;
 }
 
+/* ---- Aurora bottom fade ---- */
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 320px;
+  background: linear-gradient(
+    to top,
+    rgba(244, 167, 195, 0.07) 0%,
+    rgba(201, 184, 245, 0.05) 30%,
+    rgba(126, 232, 232, 0.03) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Holographic keyframes ---- */
+@keyframes holo-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes orb-morph {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%; }
+  75%  { border-radius: 70% 30% 60% 40% / 40% 60% 30% 70%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+@keyframes orb-glow {
+  0%   { opacity: 0.13; filter: blur(70px) hue-rotate(0deg); }
+  50%  { opacity: 0.22; filter: blur(90px) hue-rotate(40deg); }
+  100% { opacity: 0.13; filter: blur(70px) hue-rotate(0deg); }
+}
+
+@keyframes sparkle-pulse {
+  0%, 100% { opacity: 0.1; transform: scale(0.8); }
+  50%       { opacity: 0.7; transform: scale(1.2); }
+}
+
+@keyframes border-iridescent {
+  0%   { border-color: rgba(244, 167, 195, 0.35); }
+  33%  { border-color: rgba(201, 184, 245, 0.35); }
+  66%  { border-color: rgba(126, 232, 232, 0.35); }
+  100% { border-color: rgba(244, 167, 195, 0.35); }
+}
+
+@keyframes float-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hue-scroll {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(360deg); }
+}
+
+/* ---- Holographic text gradient ---- */
+.holo-text {
+  background: linear-gradient(
+    135deg,
+    var(--pink) 0%,
+    var(--lavender) 30%,
+    var(--aqua) 60%,
+    var(--pearl) 80%,
+    var(--pink) 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: holo-shift 6s ease infinite;
+}
+
+.holo-text-hover {
+  background: linear-gradient(
+    135deg,
+    var(--pearl) 0%,
+    var(--pink) 25%,
+    var(--lavender) 50%,
+    var(--aqua) 75%,
+    var(--pearl) 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: holo-shift 4s ease infinite;
+}
+
+/* ---- Label accent text ---- */
+.holo-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--pink), var(--lavender), var(--aqua));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: holo-shift 3s ease infinite;
+}
+
+/* ---- Glass card ---- */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.4s var(--ease-float);
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow:
+    0 0 20px rgba(244, 167, 195, 0.08),
+    0 0 40px rgba(201, 184, 245, 0.06),
+    0 0 80px rgba(126, 232, 232, 0.04),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+/* ---- Holographic pill chip ---- */
+.holo-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.04);
+  position: relative;
+  color: var(--foreground-muted);
+  letter-spacing: 0.02em;
+}
+
+.holo-chip::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 100px;
+  background: linear-gradient(
+    135deg,
+    rgba(244, 167, 195, 0.4),
+    rgba(201, 184, 245, 0.4),
+    rgba(126, 232, 232, 0.4),
+    rgba(244, 167, 195, 0.4)
+  );
+  background-size: 200% 200%;
+  animation: holo-shift 4s ease infinite;
+  z-index: -1;
+}
+
+/* ---- Sparkles (pure CSS 4-pointed stars) ---- */
+.sparkle {
+  position: fixed;
+  clip-path: polygon(
+    50% 0%, 55% 44%, 100% 50%,
+    55% 56%, 50% 100%, 45% 56%,
+    0% 50%, 45% 44%
+  );
+  background: rgba(240, 238, 248, 0.7);
+  pointer-events: none;
+  z-index: 1;
+  animation: sparkle-pulse var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ---- Navbar iridescent border ---- */
+.nav-scrolled {
+  animation: border-iridescent 3s ease infinite;
+}
+
+/* ---- Section float-in ---- */
+.section-float {
+  animation: float-in 0.7s var(--ease-float) both;
+}
+
+/* ---- Cormorant header ---- */
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
 code {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
 }

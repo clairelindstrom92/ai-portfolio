@@ -1,127 +1,202 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react'
+
+const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false })
+
+const ease = [0.23, 1, 0.32, 1]
 
 export default function Hero() {
   return (
     <>
       <section className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        {/* Enhanced background with gradient and dot grid */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-purple-500/3" />
-          <div 
-            className="absolute inset-0 opacity-[0.03]"
-            style={{
-              backgroundImage: `radial-gradient(circle, rgba(229, 229, 229, 0.1) 1px, transparent 1px)`,
-              backgroundSize: '24px 24px',
-            }}
-          />
+        {/* 3D iridescent sphere — offset right */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            right: '-5%',
+            top: '5%',
+            width: '55%',
+            height: '90%',
+            zIndex: 0,
+          }}
+        >
+          <HeroScene />
         </div>
 
+        {/* Soft radial glow behind sphere */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            right: '-10%',
+            top: '10%',
+            width: '60%',
+            height: '80%',
+            background: 'radial-gradient(ellipse at center, rgba(201,184,245,0.12) 0%, rgba(244,167,195,0.07) 40%, transparent 70%)',
+            zIndex: 0,
+          }}
+        />
+
         <div className="max-w-7xl mx-auto w-full relative z-10 pt-[120px] pb-20">
-          <div className="max-w-4xl">
+          <div className="max-w-2xl">
+
+            {/* Label */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease }}
+              className="mb-6"
+            >
+              <span className="holo-label">AI Systems Engineer · Frederick, MD</span>
+            </motion.div>
+
             {/* Name */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="mb-8"
+              transition={{ duration: 0.7, delay: 0.1, ease }}
+              className="mb-4"
             >
-              <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground mb-2">
-                Claire Lindstrom
+              <h1
+                className="font-display leading-[1.05] tracking-wide"
+                style={{
+                  fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+                  fontWeight: 300,
+                  color: 'var(--pearl)',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                <span
+                  className="holo-text-hover cursor-default select-none"
+                  style={{ display: 'inline-block' }}
+                >
+                  Claire
+                </span>
+                <br />
+                <span style={{ color: 'var(--pearl)' }}>Lindstrom</span>
               </h1>
-              <p className="text-sm text-foreground/70 font-medium tracking-wide">
-                AI Software Engineer | Real-Time Voice AI | Applied LLM Systems
-              </p>
-              <p className="text-xs text-foreground/60 font-mono mt-1">
-                Frederick, MD • U.S. Citizen • Clearance Eligible
-              </p>
             </motion.div>
 
-            {/* Main Headline */}
-            <motion.div
+            {/* Tagline */}
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="mb-6"
+              transition={{ duration: 0.7, delay: 0.2, ease }}
+              className="mb-10 tracking-widest uppercase text-xs"
+              style={{ color: 'var(--lavender)', opacity: 0.75, letterSpacing: '0.18em' }}
             >
-              <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight text-foreground mb-6">
-                I build production AI systems.
-              </h2>
-              <p className="text-xl sm:text-2xl text-foreground/80 leading-relaxed max-w-3xl">
-                LLM systems, agents, RAG, evaluation, real-time voice, and cloud deployment.
-              </p>
-            </motion.div>
+              LLM Systems · Voice AI · RAG · Cloud Deployment
+            </motion.p>
+
+            {/* Headline */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease }}
+              className="font-display mb-8"
+              style={{
+                fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
+                fontWeight: 300,
+                color: 'rgba(240,238,248,0.8)',
+                letterSpacing: '0.02em',
+                lineHeight: 1.4,
+              }}
+            >
+              I build production AI systems.
+            </motion.h2>
 
             {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="flex flex-wrap items-center gap-4 mb-8"
+              transition={{ duration: 0.7, delay: 0.4, ease }}
+              className="flex flex-wrap items-center gap-4 mb-10"
             >
               <a
                 href="#projects"
-                className="px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent-dark transition-all duration-200 flex items-center gap-2 group"
+                className="flex items-center gap-2 group transition-all duration-400 px-6 py-3 rounded-full text-sm font-medium"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(244,167,195,0.2), rgba(201,184,245,0.2), rgba(126,232,232,0.15))',
+                  border: '1px solid rgba(201,184,245,0.3)',
+                  color: 'var(--pearl)',
+                  backdropFilter: 'blur(10px)',
+                  transition: `all 0.4s cubic-bezier(0.23, 1, 0.32, 1)`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 0 30px rgba(201,184,245,0.25), 0 0 60px rgba(244,167,195,0.1)'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
               >
                 See Projects
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
               <a
                 href="#contact"
-                className="px-6 py-3 border border-foreground/20 rounded-lg font-medium hover:border-foreground/40 hover:bg-foreground/5 transition-all duration-200"
+                className="px-6 py-3 rounded-full text-sm font-medium transition-all duration-400"
+                style={{
+                  border: '1px solid rgba(240,238,248,0.12)',
+                  color: 'rgba(240,238,248,0.65)',
+                  transition: `all 0.4s cubic-bezier(0.23, 1, 0.32, 1)`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(201,184,245,0.35)'
+                  e.currentTarget.style.color = 'var(--lavender)'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(240,238,248,0.12)'
+                  e.currentTarget.style.color = 'rgba(240,238,248,0.65)'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
               >
                 Contact
               </a>
-              <a
-                href="/resume.pdf"
-                className="px-6 py-3 border border-foreground/20 rounded-lg font-medium hover:border-foreground/40 hover:bg-foreground/5 transition-all duration-200 text-sm"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download Resume
-              </a>
             </motion.div>
 
-            {/* Quick Links */}
+            {/* Social links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              transition={{ duration: 0.7, delay: 0.5, ease }}
               className="flex items-center gap-6"
             >
-              <a
-                href="https://github.com/clairelindstrom92"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-foreground transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/clairelindstrom/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-foreground transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="mailto:clairelindstrom7@gmail.com"
-                className="text-foreground/60 hover:text-foreground transition-colors"
-                aria-label="Email"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
+              {[
+                { href: 'https://github.com/clairelindstrom92', icon: Github, label: 'GitHub' },
+                { href: 'https://www.linkedin.com/in/clairelindstrom/', icon: Linkedin, label: 'LinkedIn' },
+                { href: 'mailto:clairelindstrom7@gmail.com', icon: Mail, label: 'Email' },
+              ].map(({ href, icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={label}
+                  className="transition-all duration-300"
+                  style={{ color: 'rgba(240,238,248,0.35)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--lavender)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(240,238,248,0.35)')}
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
             </motion.div>
           </div>
         </div>
       </section>
-      {/* Thin divider below hero */}
-      <div className="h-px bg-foreground/5 mx-auto max-w-7xl" />
+
+      {/* Iridescent hairline divider */}
+      <div
+        style={{
+          height: '1px',
+          background: 'linear-gradient(90deg, transparent, rgba(244,167,195,0.3), rgba(201,184,245,0.3), rgba(126,232,232,0.3), transparent)',
+        }}
+      />
     </>
   )
 }

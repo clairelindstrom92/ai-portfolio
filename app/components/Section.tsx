@@ -1,4 +1,7 @@
-import { ReactNode } from 'react'
+'use client'
+
+import { ReactNode, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 interface SectionProps {
   id?: string
@@ -9,29 +12,68 @@ interface SectionProps {
   noDivider?: boolean
 }
 
+const ease = [0.23, 1, 0.32, 1]
+
 export default function Section({ id, title, subtitle, children, className = '', noDivider = false }: SectionProps) {
+  const ref = useRef<HTMLElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
+
   return (
     <>
-      {!noDivider && <div className="h-px bg-foreground/5 mx-auto max-w-7xl" />}
-      <section id={id} className={`py-20 px-4 sm:px-6 lg:px-8 relative ${className}`}>
+      {!noDivider && (
+        <div
+          style={{
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)',
+            margin: '0 auto',
+            maxWidth: '80rem',
+          }}
+        />
+      )}
+      <section
+        ref={ref}
+        id={id}
+        className={`py-24 px-4 sm:px-6 lg:px-8 relative ${className}`}
+      >
         <div className="max-w-7xl mx-auto">
           {(title || subtitle) && (
-            <div className="mb-12 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.7, ease }}
+              className="mb-16 text-center"
+            >
               {title && (
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight text-foreground">
+                <h2
+                  className="font-display mb-4"
+                  style={{
+                    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                    fontWeight: 300,
+                    letterSpacing: '0.06em',
+                    color: 'var(--pearl)',
+                  }}
+                >
                   {title}
                 </h2>
               )}
               {subtitle && (
-                <p className="text-lg sm:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed">
+                <p
+                  className="holo-label mx-auto"
+                  style={{ maxWidth: '36rem', display: 'block', lineHeight: 2 }}
+                >
                   {subtitle}
                 </p>
               )}
-            </div>
+            </motion.div>
           )}
-          <div className="space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            transition={{ duration: 0.7, delay: 0.1, ease }}
+            className="space-y-8"
+          >
             {children}
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

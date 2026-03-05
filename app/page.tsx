@@ -1,21 +1,4 @@
-/**
- * CHANGELOG - Portfolio Upgrade
- * 
- * Major updates:
- * - Rebalanced content to emphasize "production AI systems engineer" (not only voice AI)
- * - Updated Hero with new headline "I build production AI systems" and CTAs
- * - Restructured Projects section with 3 main projects:
- *   1. Voice AI for Field Ops - with employer badge and IP-safe content
- *   2. Manifest Alchemy AI - Founder project
- *   3. RAG Evaluation & Retrieval Toolkit - Personal project
- * - Added Experience section with timeline
- * - Updated Skills section with grouped, real skills (8-12 items)
- * - Improved Contact section with copy button and cleaner layout
- * - Updated all contact links throughout site
- * - Enhanced visual design: better typography, spacing, subtle motion
- * - Removed Architecture section from main page (moved to project detail)
- * - Made voice AI project page IP-safe with employer disclaimer
- */
+'use client'
 
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -23,7 +6,7 @@ import Section from './components/Section'
 import ProjectCard from './components/ProjectCard'
 import Footer from './components/Footer'
 import Link from 'next/link'
-import { Briefcase, Building2, Code, Calendar, Zap, ArrowRight, ExternalLink } from 'lucide-react'
+import { Building2, Code, Calendar, Zap, ArrowRight } from 'lucide-react'
 import {
   VoiceAIPreview,
   ManifestAlchemyPreview,
@@ -32,6 +15,7 @@ import {
   SynergyLivingPreview,
   SmartSitePreview,
 } from './components/ProjectPreviews'
+import AboutSceneWrapper from './components/AboutSceneWrapper'
 
 export default function Home() {
   const projects = [
@@ -168,29 +152,34 @@ export default function Home() {
       <Hero />
 
       <Section id="about" title="About" subtitle="Production AI systems engineering">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-10 space-y-6 text-lg text-foreground/95 leading-relaxed">
-            <p className="text-xl text-foreground/95">
-              I build and deploy <span className="text-accent font-semibold">production AI systems</span> that operate reliably in real-world environments. 
-              My work spans LLM orchestration, agentic systems, RAG infrastructure, evaluation frameworks, 
-              and real-time voice AI platforms.
+        <div className="max-w-5xl mx-auto relative">
+          {/* Floating glass 3D object */}
+          <AboutSceneWrapper />
+          <div
+            className="glass-card rounded-2xl p-10 space-y-6 leading-relaxed relative z-10"
+            style={{ maxWidth: '680px' }}
+          >
+            <p className="text-base" style={{ color: 'rgba(240,238,248,0.85)', lineHeight: 1.9 }}>
+              I build and deploy{' '}
+              <span className="holo-text" style={{ fontWeight: 500 }}>production AI systems</span>{' '}
+              that operate reliably in real-world environments. My work spans LLM orchestration,
+              agentic systems, RAG infrastructure, evaluation frameworks, and real-time voice AI platforms.
             </p>
-            <p className="text-foreground/95">
-              I specialize in the full stack of AI infrastructure: <span className="text-accent font-medium">LLM systems and agents</span>, 
-              {' '}<span className="text-accent font-medium">semantic retrieval and RAG</span>, 
-              {' '}<span className="text-accent font-medium">evaluation and testing</span>, and 
-              {' '}<span className="text-accent font-medium">real-time communication systems</span>. My systems are designed for 
-              production—not prototypes. I focus on reliability, observability, and performance at scale.
+            <p className="text-base" style={{ color: 'rgba(240,238,248,0.7)', lineHeight: 1.9 }}>
+              I specialize in the full stack of AI infrastructure:{' '}
+              <span style={{ color: 'var(--lavender)' }}>LLM systems and agents</span>,{' '}
+              <span style={{ color: 'var(--aqua)' }}>semantic retrieval and RAG</span>,{' '}
+              <span style={{ color: 'var(--pink)' }}>evaluation and testing</span>, and{' '}
+              <span style={{ color: 'var(--lavender)' }}>real-time communication systems</span>.
             </p>
-            <p className="text-foreground/95">
-              My approach treats AI systems as distributed systems: modular orchestration layers, 
-              rigorous evaluation of LLM failure modes, and observability-first design. I build 
-              systems with proper testing, monitoring, and deployment practices.
+            <p className="text-base" style={{ color: 'rgba(240,238,248,0.7)', lineHeight: 1.9 }}>
+              My approach treats AI systems as distributed systems: modular orchestration layers,
+              rigorous evaluation of LLM failure modes, and observability-first design.
             </p>
-            <div className="pt-4 border-t border-foreground/10">
-              <p className="text-base text-foreground/75">
-                Based in Frederick, MD. B.S. Computer Science (GPA: 3.49), University of Maryland Global Campus, 2025. 
-                Certificate: Artificial Intelligence Foundations. U.S. Citizen, eligible for security clearance.
+            <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              <p className="text-sm" style={{ color: 'rgba(240,238,248,0.45)', lineHeight: 1.8 }}>
+                Based in Frederick, MD · B.S. Computer Science (GPA: 3.49), UMGC 2025 ·
+                Certificate: Artificial Intelligence Foundations · U.S. Citizen, clearance eligible
               </p>
             </div>
           </div>
@@ -207,80 +196,71 @@ export default function Home() {
 
       <Section id="skills" title="Skills" subtitle="Technologies and capabilities">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div>
-              <h3 className="text-sm font-mono text-accent uppercase tracking-wider mb-4">Languages</h3>
-              <ul className="space-y-2">
-                {skills.languages.map((skill) => (
-                  <li key={skill} className="text-foreground/90 text-sm">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-mono text-accent uppercase tracking-wider mb-4">AI & ML</h3>
-              <ul className="space-y-2">
-                {skills.aiMl.map((skill) => (
-                  <li key={skill} className="text-foreground/90 text-sm">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-mono text-accent uppercase tracking-wider mb-4">Web & Backend</h3>
-              <ul className="space-y-2">
-                {skills.webBackend.map((skill) => (
-                  <li key={skill} className="text-foreground/90 text-sm">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-mono text-accent uppercase tracking-wider mb-4">Databases</h3>
-              <ul className="space-y-2">
-                {skills.databases.map((skill) => (
-                  <li key={skill} className="text-foreground/90 text-sm">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-mono text-accent uppercase tracking-wider mb-4">Cloud & DevOps</h3>
-              <ul className="space-y-2">
-                {skills.cloud.map((skill) => (
-                  <li key={skill} className="text-foreground/90 text-sm">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { label: 'Languages', items: skills.languages, color: 'var(--pink)' },
+              { label: 'AI & ML', items: skills.aiMl, color: 'var(--lavender)' },
+              { label: 'Web & Backend', items: skills.webBackend, color: 'var(--aqua)' },
+              { label: 'Databases', items: skills.databases, color: 'var(--pink)' },
+              { label: 'Cloud & DevOps', items: skills.cloud, color: 'var(--lavender)' },
+            ].map(({ label, items, color }) => (
+              <div key={label} className="glass-card rounded-2xl p-6">
+                <h3
+                  className="holo-label mb-5"
+                  style={{ color }}
+                >
+                  {label}
+                </h3>
+                <ul className="space-y-2.5">
+                  {items.map((skill) => (
+                    <li
+                      key={skill}
+                      className="text-sm flex items-center gap-2"
+                      style={{ color: 'rgba(240,238,248,0.65)' }}
+                    >
+                      <span style={{ color, opacity: 0.5, fontSize: '0.5rem' }}>◆</span>
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </Section>
 
       <Section id="experience" title="Experience" subtitle="Professional background">
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="max-w-4xl mx-auto space-y-5">
           {experience.map((exp, index) => (
-            <div key={index} className="bg-foreground/5 border border-foreground/10 rounded-lg p-8 relative pl-12">
-              <div className="absolute left-6 top-8 w-2 h-2 bg-accent rounded-full" />
-              <div className="flex items-start justify-between mb-4">
+            <div
+              key={index}
+              className="glass-card rounded-2xl p-8 relative pl-12"
+            >
+              <div
+                className="absolute left-6 top-9 w-2 h-2 rounded-full"
+                style={{ background: 'linear-gradient(135deg, var(--pink), var(--lavender))' }}
+              />
+              <div className="flex items-start justify-between mb-4 flex-wrap gap-3">
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground mb-1">{exp.role}</h3>
-                  <div className="flex items-center gap-2 text-foreground/70">
-                    <Building2 className="h-4 w-4" />
-                    <span className="font-medium">{exp.company}</span>
+                  <h3
+                    className="font-display mb-1"
+                    style={{ fontSize: '1.3rem', fontWeight: 300, letterSpacing: '0.03em', color: 'var(--pearl)' }}
+                  >
+                    {exp.role}
+                  </h3>
+                  <div className="flex items-center gap-2" style={{ color: 'rgba(240,238,248,0.5)' }}>
+                    <Building2 className="h-3.5 w-3.5" />
+                    <span className="text-sm">{exp.company}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-foreground/60">
-                  <Calendar className="h-4 w-4" />
-                  <span>{exp.period}</span>
+                <div className="flex items-center gap-2" style={{ color: 'rgba(240,238,248,0.35)' }}>
+                  <Calendar className="h-3.5 w-3.5" />
+                  <span className="text-xs tracking-wider">{exp.period}</span>
                 </div>
               </div>
-              <p className="text-foreground/90 leading-relaxed">{exp.description}</p>
+              <p className="text-sm leading-relaxed" style={{ color: 'rgba(240,238,248,0.65)', lineHeight: 1.8 }}>
+                {exp.description}
+              </p>
             </div>
           ))}
         </div>
@@ -291,66 +271,79 @@ export default function Home() {
           {prototypes.map((proto) => (
             <div
               key={proto.title}
-              className="bg-foreground/5 border border-foreground/10 rounded-lg overflow-hidden hover:border-accent/30 hover:shadow-xl transition-all duration-300"
+              className="glass-card rounded-2xl overflow-hidden transition-all duration-500"
+              style={{ '--ease-float': 'cubic-bezier(0.23, 1, 0.32, 1)' } as React.CSSProperties}
             >
-              <div className="w-full aspect-video bg-foreground/5 border-b border-foreground/10 overflow-hidden relative">
+              <div className="w-full aspect-video overflow-hidden relative" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 <SmartSitePreview />
               </div>
               <div className="p-8">
-              <div className="flex items-start justify-between mb-4 flex-wrap gap-4">
-                <div>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono rounded border bg-accent/10 border-accent/20 text-accent/90 mb-3">
-                    <Zap className="h-3 w-3" />
-                    Interactive Prototype
-                  </span>
-                  <h3 className="text-2xl font-bold text-accent">{proto.title}</h3>
-                  <p className="text-sm text-foreground/60 font-mono">{proto.subtitle}</p>
-                </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-start justify-between mb-5 flex-wrap gap-4">
+                  <div>
+                    <span className="holo-chip mb-3 inline-flex items-center gap-1.5">
+                      <Zap className="h-3 w-3" style={{ color: 'var(--aqua)' }} />
+                      Interactive Prototype
+                    </span>
+                    <h3
+                      className="font-display mt-3"
+                      style={{ fontSize: '2rem', fontWeight: 300, letterSpacing: '0.04em', color: 'var(--lavender)' }}
+                    >
+                      {proto.title}
+                    </h3>
+                    <p className="holo-label mt-1">{proto.subtitle}</p>
+                  </div>
                   {proto.repo && (
                     <a
                       href={proto.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-foreground/50 hover:text-foreground transition-colors"
+                      style={{ color: 'rgba(240,238,248,0.3)' }}
                       aria-label="Repository"
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--pink)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(240,238,248,0.3)')}
                     >
                       <Code className="h-5 w-5" />
                     </a>
                   )}
                 </div>
-              </div>
 
-              <p className="text-foreground/80 leading-relaxed mb-6 max-w-2xl">{proto.description}</p>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(240,238,248,0.65)', maxWidth: '42rem', lineHeight: 1.8 }}>
+                  {proto.description}
+                </p>
 
-              <div className="flex flex-wrap gap-2 mb-6">
-                {proto.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1.5 text-xs font-mono rounded border bg-foreground/10 border-foreground/20 text-foreground/80"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex items-center justify-between pt-4 border-t border-foreground/10 flex-wrap gap-4">
-                <div className="flex flex-wrap gap-2">
-                  {proto.commands.map((cmd) => (
-                    <span key={cmd} className="text-xs font-mono text-accent/70 bg-accent/5 border border-accent/15 px-2 py-1 rounded">
-                      {cmd}
-                    </span>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {proto.technologies.map((tech) => (
+                    <span key={tech} className="holo-chip">{tech}</span>
                   ))}
                 </div>
-                <Link
-                  href={proto.href}
-                  className="flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors group"
+
+                <div
+                  className="flex items-center justify-between flex-wrap gap-4 pt-5"
+                  style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
                 >
-                  <span>View Details</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                  <div className="flex flex-wrap gap-2">
+                    {proto.commands.map((cmd) => (
+                      <span
+                        key={cmd}
+                        className="text-xs font-mono px-2.5 py-1 rounded-full"
+                        style={{ color: 'var(--aqua)', background: 'rgba(126,232,232,0.06)', border: '1px solid rgba(126,232,232,0.15)' }}
+                      >
+                        {cmd}
+                      </span>
+                    ))}
+                  </div>
+                  <Link
+                    href={proto.href}
+                    className="flex items-center gap-2 text-xs tracking-wider group transition-all duration-300"
+                    style={{ color: 'rgba(240,238,248,0.45)' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--lavender)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(240,238,248,0.45)')}
+                  >
+                    View Details
+                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </div>
-              </div>{/* end p-8 */}
             </div>
           ))}
         </div>
