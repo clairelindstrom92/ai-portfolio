@@ -64,6 +64,7 @@ export default function Home() {
       badge: 'Founder Project',
       preview: <ManifestAlchemyPreview />,
       links: {
+        live: 'https://manifestalchemy.ai',
         repo: 'https://github.com/clairelindstrom92/manifestalchemy.ai',
       },
     },
@@ -92,6 +93,7 @@ export default function Home() {
       badge: 'Founder Project',
       preview: <GeneratedMoonPreview />,
       links: {
+        live: 'https://ai-design-website-ruddy.vercel.app',
         repo: 'https://github.com/clairelindstrom92/AiDesignWebsite',
       },
     },
@@ -106,7 +108,8 @@ export default function Home() {
       badge: 'Founder Project',
       preview: <SynergyLivingPreview />,
       links: {
-        repo: 'https://github.com/clairelindstrom92/synergy-living',
+        live: 'https://synergylivingnews.com',
+        repo: 'https://github.com/clairelindstrom92/synergyliving',
       },
     },
   ]

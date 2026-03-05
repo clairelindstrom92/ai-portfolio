@@ -124,7 +124,7 @@ export default function SynergyLivingPage() {
             <section>
               <div className="flex items-center gap-4 pt-4 border-t border-foreground/10">
                 <a
-                  href="https://github.com/clairelindstrom92/synergy-living"
+                  href="https://github.com/clairelindstrom92/synergyliving"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors"

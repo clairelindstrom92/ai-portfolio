@@ -1,7 +1,24 @@
-// Mini CSS-rendered previews for each project card.
-// Each preview fills a 16:9 aspect-video container.
+'use client'
+
+import Image from 'next/image'
+
+// thum.io: free screenshot service, no API key required
+// Returns a direct PNG screenshot of any public URL
+function SiteScreenshot({ url, alt }: { url: string; alt: string }) {
+  const screenshotUrl = `https://image.thum.io/get/width/1200/crop/800/${url}`
+  return (
+    <Image
+      src={screenshotUrl}
+      alt={alt}
+      fill
+      className="object-cover object-top"
+      unoptimized
+    />
+  )
+}
 
 export function VoiceAIPreview() {
+  // Employer project — no public URL, use coded mockup
   const bars = [40, 65, 85, 55, 90, 45, 70, 60, 80, 50, 75, 35, 88, 62, 48]
   return (
     <div className="w-full h-full bg-[#07101a] flex flex-col items-center justify-center gap-3 p-4">
@@ -14,12 +31,7 @@ export function VoiceAIPreview() {
           <div
             key={i}
             className="w-1.5 rounded-full bg-cyan-400"
-            style={{
-              height: `${h}%`,
-              opacity: 0.5 + (i % 3) * 0.2,
-              animation: `pulse ${0.8 + (i % 4) * 0.2}s ease-in-out infinite alternate`,
-              animationDelay: `${i * 0.06}s`,
-            }}
+            style={{ height: `${h}%`, opacity: 0.4 + (i % 3) * 0.25 }}
           />
         ))}
       </div>
@@ -35,35 +47,11 @@ export function VoiceAIPreview() {
 }
 
 export function ManifestAlchemyPreview() {
-  return (
-    <div className="w-full h-full bg-[#0d0718] flex flex-col justify-between p-4">
-      <div className="flex items-center gap-2">
-        <div className="w-5 h-5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
-        <span className="text-[10px] font-mono text-purple-300">Manifest Alchemy AI</span>
-      </div>
-      <div className="flex flex-col gap-2">
-        <div className="self-end bg-purple-600/40 border border-purple-500/30 rounded-lg rounded-br-sm px-3 py-1.5 max-w-[70%]">
-          <p className="text-[9px] text-purple-100">Set my goal for this quarter</p>
-        </div>
-        <div className="self-start bg-white/5 border border-white/10 rounded-lg rounded-bl-sm px-3 py-1.5 max-w-[80%]">
-          <p className="text-[9px] text-foreground/80">Based on your journal, I&apos;d suggest focusing on...</p>
-        </div>
-        <div className="self-end bg-purple-600/40 border border-purple-500/30 rounded-lg rounded-br-sm px-3 py-1.5 max-w-[60%]">
-          <p className="text-[9px] text-purple-100">Retrieve last month&apos;s entries</p>
-        </div>
-      </div>
-      <div className="flex gap-1">
-        {['RAG', 'pgvector', 'Supabase'].map((t) => (
-          <span key={t} className="text-[8px] font-mono bg-purple-500/10 border border-purple-500/20 text-purple-400/80 px-1.5 py-0.5 rounded">
-            {t}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
+  return <SiteScreenshot url="https://manifestalchemy.ai" alt="Manifest Alchemy AI" />
 }
 
 export function DocumentProcessingPreview() {
+  // No live URL — coded mockup
   return (
     <div className="w-full h-full bg-[#0a0f1a] flex flex-col justify-between p-4">
       <div className="flex items-center gap-2">
@@ -89,63 +77,15 @@ export function DocumentProcessingPreview() {
 }
 
 export function GeneratedMoonPreview() {
-  return (
-    <div className="w-full h-full bg-[#08070f] flex flex-col justify-between p-4">
-      <div className="flex items-center justify-between">
-        <span className="text-[10px] font-mono text-yellow-300/80 tracking-widest">GENERATED MOON</span>
-        <span className="text-[8px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-400/80 px-1.5 py-0.5 rounded">Luxury AI</span>
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <div className="self-start bg-yellow-500/10 border border-yellow-500/20 rounded-lg px-3 py-1.5">
-          <p className="text-[9px] text-yellow-100/80">What&apos;s your project budget range?</p>
-        </div>
-        <div className="self-end bg-white/5 border border-white/10 rounded-lg px-3 py-1.5">
-          <p className="text-[9px] text-foreground/70">$15k – $25k for a full rebrand</p>
-        </div>
-        <div className="self-start bg-yellow-500/10 border border-yellow-500/20 rounded-lg px-3 py-1.5">
-          <p className="text-[9px] text-yellow-100/80">Generating your project brief...</p>
-        </div>
-      </div>
-      <div className="flex gap-1.5">
-        {['Claude AI', 'Stripe', 'Resend'].map((t) => (
-          <span key={t} className="text-[8px] font-mono bg-yellow-500/10 border border-yellow-500/20 text-yellow-400/80 px-1.5 py-0.5 rounded">
-            {t}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
+  return <SiteScreenshot url="https://ai-design-website-ruddy.vercel.app" alt="Generated Moon AI Design Agency" />
 }
 
 export function SynergyLivingPreview() {
-  return (
-    <div className="w-full h-full bg-[#0d1a0f] flex flex-col justify-between p-4">
-      <div className="flex items-center gap-2">
-        <div className="w-4 h-4 rounded-full bg-green-500/40 border border-green-500/40 flex items-center justify-center text-[8px]">🌿</div>
-        <span className="text-[10px] font-mono text-green-400">Synergy Living</span>
-      </div>
-      <div className="flex flex-col gap-2">
-        <div className="h-[2px] bg-green-500/20 rounded w-full" />
-        <div className="text-[11px] font-semibold text-green-100">Balance your mind.</div>
-        <div className="text-[11px] font-semibold text-green-100">Strengthen your life.</div>
-        <div className="flex gap-[3px] mt-1">
-          {[80, 60, 90, 70, 50].map((w, i) => (
-            <div key={i} className="h-1.5 bg-green-400/20 rounded" style={{ width: `${w * 0.4}px` }} />
-          ))}
-        </div>
-      </div>
-      <div className="flex gap-1.5">
-        {['Home', 'About', 'Resources', 'Stories'].map((p) => (
-          <span key={p} className="text-[8px] font-mono text-green-400/60 border border-green-500/15 px-1.5 py-0.5 rounded bg-green-500/5">
-            {p}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
+  return <SiteScreenshot url="https://synergylivingnews.com" alt="Synergy Living" />
 }
 
 export function SmartSitePreview() {
+  // Local prototype — no live URL yet, coded mockup
   return (
     <div className="w-full h-full bg-[#07070f] flex flex-col justify-between p-4 relative overflow-hidden">
       <div
@@ -158,7 +98,10 @@ export function SmartSitePreview() {
       </div>
       <div className="flex flex-col gap-1.5 relative">
         <div className="text-[11px] font-bold text-white">Your website,</div>
-        <div className="text-[11px] font-bold" style={{ background: 'linear-gradient(135deg, #7c3aed, #00e5ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <div
+          className="text-[11px] font-bold"
+          style={{ background: 'linear-gradient(135deg, #7c3aed, #00e5ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+        >
           built by voice
         </div>
         <div className="flex gap-1 mt-1">
@@ -171,7 +114,10 @@ export function SmartSitePreview() {
       </div>
       <div className="flex items-center justify-between relative">
         <span className="text-[8px] font-mono text-foreground/30">React · Vite · Web Speech API</span>
-        <div className="w-7 h-7 rounded-full bg-purple-600 flex items-center justify-center shadow-lg" style={{ boxShadow: '0 0 12px rgba(124,58,237,0.5)' }}>
+        <div
+          className="w-7 h-7 rounded-full bg-purple-600 flex items-center justify-center"
+          style={{ boxShadow: '0 0 12px rgba(124,58,237,0.5)' }}
+        >
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="9" y="2" width="6" height="12" rx="3" />
             <path d="M5 10a7 7 0 0 0 14 0" />
