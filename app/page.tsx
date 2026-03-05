@@ -22,7 +22,8 @@ import Hero from './components/Hero'
 import Section from './components/Section'
 import ProjectCard from './components/ProjectCard'
 import Footer from './components/Footer'
-import { Briefcase, Building2, Code, Calendar } from 'lucide-react'
+import Link from 'next/link'
+import { Briefcase, Building2, Code, Calendar, Zap, ArrowRight, ExternalLink } from 'lucide-react'
 
 export default function Home() {
   const projects = [
@@ -81,6 +82,32 @@ export default function Home() {
       links: {
         repo: 'https://github.com/clairelindstrom92/AiDesignWebsite',
       },
+    },
+    {
+      title: 'Synergy Living',
+      subtitle: 'Wellness Platform',
+      description:
+        'Multi-page wellness platform built with clean semantic HTML, custom CSS, and vanilla JavaScript. Covers Home, About, Resources, Newsletter, and Stories — a full brand identity and content system with zero dependencies.',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'UI/UX'],
+      href: '/projects/synergy-living',
+      featured: false,
+      badge: 'Founder Project',
+      links: {
+        repo: 'https://github.com/clairelindstrom92/synergy-living',
+      },
+    },
+  ]
+
+  const prototypes = [
+    {
+      title: 'Smart Site',
+      subtitle: 'Voice AI Web Builder',
+      description:
+        'Speak commands to modify a live website in real time. "Add testimonials", "dark theme", "add booking section" — the AI interprets voice input and updates the layout instantly with animated transitions.',
+      technologies: ['React', 'Vite', 'Web Speech API', 'Claude API', 'OpenAI API', 'CSS'],
+      href: '/projects/smart-site',
+      repo: 'https://github.com/clairelindstrom92/smart-site-prototype',
+      commands: ['"Add testimonials"', '"Dark theme"', '"Add booking section"', '"Make it modern"'],
     },
   ]
 
@@ -238,6 +265,71 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-foreground/90 leading-relaxed">{exp.description}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="prototypes" title="Prototypes" subtitle="Interactive demos and experiments">
+        <div className="space-y-6">
+          {prototypes.map((proto) => (
+            <div
+              key={proto.title}
+              className="bg-foreground/5 border border-foreground/10 rounded-lg p-8 hover:border-accent/30 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-start justify-between mb-4 flex-wrap gap-4">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono rounded border bg-accent/10 border-accent/20 text-accent/90 mb-3">
+                    <Zap className="h-3 w-3" />
+                    Interactive Prototype
+                  </span>
+                  <h3 className="text-2xl font-bold text-accent">{proto.title}</h3>
+                  <p className="text-sm text-foreground/60 font-mono">{proto.subtitle}</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  {proto.repo && (
+                    <a
+                      href={proto.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground/50 hover:text-foreground transition-colors"
+                      aria-label="Repository"
+                    >
+                      <Code className="h-5 w-5" />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <p className="text-foreground/80 leading-relaxed mb-6 max-w-2xl">{proto.description}</p>
+
+              <div className="flex flex-wrap gap-2 mb-6">
+                {proto.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1.5 text-xs font-mono rounded border bg-foreground/10 border-foreground/20 text-foreground/80"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-between pt-4 border-t border-foreground/10 flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2">
+                  {proto.commands.map((cmd) => (
+                    <span key={cmd} className="text-xs font-mono text-accent/70 bg-accent/5 border border-accent/15 px-2 py-1 rounded">
+                      {cmd}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  href={proto.href}
+                  className="flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors group"
+                >
+                  <span>View Details</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
           ))}
         </div>
