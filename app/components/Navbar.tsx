@@ -12,7 +12,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
-      const sections = ['about', 'projects', 'skills', 'experience', 'contact']
+      const sections = ['about', 'projects', 'github', 'skills', 'experience', 'prototypes', 'contact']
       const scrollPosition = window.scrollY + 100
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -44,8 +44,10 @@ export default function Navbar() {
   const navLinks = [
     { href: '#about', label: 'About', id: 'about' },
     { href: '#projects', label: 'Projects', id: 'projects' },
+    { href: '#github', label: 'GitHub', id: 'github' },
     { href: '#skills', label: 'Skills', id: 'skills' },
     { href: '#experience', label: 'Experience', id: 'experience' },
+    { href: '#prototypes', label: 'Prototypes', id: 'prototypes' },
     { href: '#contact', label: 'Contact', id: 'contact' },
   ]
 
@@ -74,7 +76,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-5">
             {navLinks.map((link) => (
               <a
                 key={link.id}

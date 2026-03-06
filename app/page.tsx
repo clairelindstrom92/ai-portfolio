@@ -14,8 +14,10 @@ import {
   GeneratedMoonPreview,
   SynergyLivingPreview,
   SmartSitePreview,
+  AOAISolutionsPreview,
 } from './components/ProjectPreviews'
 import AboutSceneWrapper from './components/AboutSceneWrapper'
+import GitHubCarousel from './components/GitHubCarousel'
 
 export default function Home() {
   const projects = [
@@ -94,6 +96,21 @@ export default function Home() {
       links: {
         live: 'https://synergylivingnews.com',
         repo: 'https://github.com/clairelindstrom92/synergyliving',
+      },
+    },
+    {
+      title: 'AO AI Solutions',
+      subtitle: 'Founder Project',
+      description:
+        'AI-powered business systems platform. Built and deployed a full client-facing web application to deliver AI-driven solutions for business operations, live at aoaisolutions.dev.',
+      technologies: ['JavaScript', 'Vite', 'Tailwind CSS', 'AI Integration'],
+      href: '/projects/ao-ai-solutions',
+      featured: false,
+      badge: 'Founder Project',
+      preview: <AOAISolutionsPreview />,
+      links: {
+        live: 'https://aoaisolutions.dev',
+        repo: 'https://github.com/clairelindstrom92/AO-AI-Solutions',
       },
     },
   ]
@@ -192,6 +209,10 @@ export default function Home() {
             <ProjectCard key={project.title} {...project} />
           ))}
         </div>
+      </Section>
+
+      <Section id="github" title="GitHub" subtitle="10 most recent repositories">
+        <GitHubCarousel />
       </Section>
 
       <Section id="skills" title="Skills" subtitle="Technologies and capabilities">

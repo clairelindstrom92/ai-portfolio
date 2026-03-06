@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react'
+import { Github, Linkedin, Mail, ArrowRight, Download } from 'lucide-react'
 
 const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false })
 
@@ -156,6 +156,32 @@ export default function Hero() {
                 }}
               >
                 Contact
+              </a>
+              <a
+                href="/resume.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-400"
+                style={{
+                  border: '1px solid rgba(126,232,232,0.18)',
+                  color: 'rgba(126,232,232,0.65)',
+                  transition: `all 0.4s cubic-bezier(0.23, 1, 0.32, 1)`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(126,232,232,0.45)'
+                  e.currentTarget.style.color = 'var(--aqua)'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 0 20px rgba(126,232,232,0.12)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(126,232,232,0.18)'
+                  e.currentTarget.style.color = 'rgba(126,232,232,0.65)'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                <Download className="h-4 w-4" />
+                Resume
               </a>
             </motion.div>
 

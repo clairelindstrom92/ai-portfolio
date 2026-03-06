@@ -84,6 +84,10 @@ export function SynergyLivingPreview() {
   return <SiteScreenshot url="https://synergylivingnews.com" alt="Synergy Living" />
 }
 
+export function AOAISolutionsPreview() {
+  return <SiteScreenshot url="https://aoaisolutions.dev" alt="AO AI Solutions" />
+}
+
 export function SmartSitePreview() {
   // Local prototype — no live URL yet, coded mockup
   return (
